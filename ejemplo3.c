@@ -2,7 +2,8 @@
 #include <stdlib.h>
 
 int main(){
-    int *arreglo, *arreglo2, num, cont;
+    //recomendable asignar nulo a un apuntador
+    int *arreglo, *arreglo2=NULL, num, cont;
     printf("¿Cuántos elementos tiene el conjunto?\n");
     scanf("%d", &num);
     arreglo = (int*)malloc(num *sizeof(int));
@@ -19,7 +20,7 @@ int main(){
 
         printf("Aumentando el espacio reservado al doble\n");
         num *=2;
-        arreglo2 = (int*)realloc(arreglo, num*sizeof(int));
+        arreglo2 = (int*)realloc(arreglo, num*sizeof(int));//Modifica el tamaño de una ona de memoria ya reservada recibe el puntador de la zona de memoria a modificar y el nuevo tamaño
         if(arreglo2 != NULL){ 
             arreglo = arreglo2;       
             for(; cont <num; cont++){
@@ -35,7 +36,8 @@ int main(){
         }
         printf("Liberando el espacio reservado\n");
 
-        free(arreglo);        
+        free(arreglo);//Solo se libera un arreglo porque arreglo 1 y 2 apuntan a la misma direcion de memoria
+        arreglo = arreglo2 = NULL;
     }
     return 0;
 }
